@@ -1,0 +1,93 @@
+Victor Verma
+vpverm@bu.edu
+
+puzzles with 5-move optimal solutions
+-------------------------------------
+algorithm                num. solved    avg. moves    avg. states tested
+------------------------------------------------------------------------
+random			   10		5.2		666.7
+BFS			   10		5.0		47.1
+DFS (depth limit 20)	   10		19.0		478.5
+DFS (depth limit 50)	   10		49.0		508.5
+Greedy Search (using h1)   10		5.4		70.3	
+A* (using h1)		   10		5.0		6.5
+
+
+puzzles with 10-move optimal solutions
+-------------------------------------
+algorithm                num. solved    avg. moves    avg. states tested
+------------------------------------------------------------------------
+random			   10		10.2		5070.0
+BFS			   10		10.0		747.4
+DFS (depth limit 20)	   10		20.0		39532.3
+DFS (depth limit 50)	   10		50.0		39562.3
+Greedy Search (using h1)   8		76.0		325.625
+A* (using h1)		   10		10.0		27.3
+
+
+puzzles with 15-move optimal solutions
+-------------------------------------
+algorithm                num. solved    avg. moves    avg. states tested
+------------------------------------------------------------------------
+random			   8		19.5		25166.75
+BFS			   10		15.0		12672.0
+DFS (depth limit 20)	   0		N/A		N/A
+DFS (depth limit 50)	   0		N/A		N/A
+Greedy Search (using h1)   7		125.857		6486.714		
+A* (using h1)		   10		15.0		313.8
+
+	
+	These results show clear trends. In general, although algorithm does not really matter with short solutions, as the solutions get more complex the small differences in algorithm efficiency are compounded into huge discrepancies. The random and DFS algorithms are fine for simple cases, but they become very slow as the problem gains complexity; DFS is nearly unusable by the 15-move solutions, unless you set a large depth limit. But, this means that there would be a less optimal solution. It is important to realize that there is often a trade-off between efficiency and optimization, so you need to decide which one to prioritize. 
+	I also learned that relatively small changes in algorithms can lead to significant changes in efficiency. For example, the only difference between Greedy Search and A* is that A* includes the number of moves in prioritizing the next state to test, while Greedy Search does not. This results in basically one change in one line of code, but it makes a huge difference. For the 15-move solutions, A* was able to give perfectly optimal solutions for every case that was tested, while Greedy Search was much slower and gave worse solutions, and only found a solution for 7 of the 10 tries.
+
+
+heuristic h2
+------------
+This heuristic assigns a score based on the number of tiles that are in the wrong row and/or column, compared to the goal state. If a tile is either in the wrong row or column, 1 is added to the heuristic score; if a tile is in both the wrong row and column, 2 is added to the heuristic score instead.
+
+
+puzzles with 18-move optimal solutions
+--------------------------------------
+algorithm              num. solved    avg. moves    avg. states tested
+----------------------------------------------------------------------
+Greedy (heuristic h1)	   8		145.75		8345.75
+Greedy (heuristic h2)	   10		74.8		254.2
+
+A* (heuristic h1)	   10		18.0		1602.0
+A* (heuristic h2)	   10		18.0		1602.0
+
+
+puzzles with 21-move optimal solutions
+--------------------------------------
+algorithm              num. solved    avg. moves    avg. states tested
+----------------------------------------------------------------------
+Greedy (heuristic h1)	   5		104.6		4172.6		
+Greedy (heuristic h2)	   10		83.4		397.7		
+
+A* (heuristic h1)	   10		21.0		6301.7
+A* (heuristic h2)	   10		21.0		6301.7
+
+
+puzzles with 24-move optimal solutions
+--------------------------------------
+algorithm              num. solved    avg. moves    avg. states tested
+----------------------------------------------------------------------
+Greedy (heuristic h1)	   6		123.667		2856.167		
+Greedy (heuristic h2)	   10		114.0		400.4		
+
+A* (heuristic h1)	   6		24.0		23857.0
+A* (heuristic h2)	   5		24.0		23685.8
+
+
+puzzles with 27-move optimal solutions
+--------------------------------------
+algorithm              num. solved    avg. moves    avg. states tested
+----------------------------------------------------------------------
+Greedy (heuristic h1)	   4		197.5		4285.5		
+Greedy (heuristic h2)	   10		117.0		402.5		
+
+A* (heuristic h1)	   0		N/A		N/A
+A* (heuristic h2)	   0		N/A		N/A
+
+
+	These results were interesting to me. I am very intrigued as to why A* produced exactly the same results, regardless of heuristic. I wonder if this has some theoretical reasoning, or if I simply messed up somehow while testing my heuristics. The Greedy algorithm was consistently less optimal than A*, but it was able to find solutions faster as the problem increased in complexity. With heuristic 2, the Greedy algorithm was able to solve the problem almost instantly, which surprised me. In the case of this problem, I would probably choose to use Greedy; although it has less optimal solutions, the fact that it yields more solutions than A* makes it more useful to me. I'd rather get a solution than not be able to solve the problem, even if it is not the most ideal solution.
